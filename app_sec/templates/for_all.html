@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
+        {% block extra_css %}{% endblock %}
+    </head>
+    <body>
+        {% block head %}
+        <div class="wrapper-top">
+            <div class="topnav">
+                <div class="logo">
+                    <a href="/catalog"><img width="100px" height="auto" src="{{url_for('static', filename='img/Logo_DetiStore-removebg-preview.png')}}"></a>
+                </div>
+                <div style="margin-top:10px;">
+                    <a href="/catalog">Home</a>
+                    <a href="/cart">Cart</a>
+                    <a href="/past-orders">Past Orders</a>
+                    <a href="/account">Account</a>
+                    <a href="/logout">Logout</a>
+                </div>
+            </div> 
+        </div>
+        {% endblock %}
+        {% block body %}{% endblock %}
+    </body>
+</html>

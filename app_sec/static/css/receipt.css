@@ -1,0 +1,57 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: url("/path/to/your/background/image.jpg");
+    background-size: cover;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+h1, h2 {
+    color: #333;
+}
+
+h1 i {
+    margin-right: 10px;
+}
+
+.thank-you {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+.thank-you-message {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.thank-you {
+    font-size: 1.5em;
+    font-weight: bold;
+}

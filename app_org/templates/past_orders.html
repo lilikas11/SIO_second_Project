@@ -1,0 +1,57 @@
+{% extends "for_all.html" %}
+{% block title %}Past Orders{% endblock %}
+
+{% block body %}
+<div class="row">
+
+    <h3 class="bold" style="font-size: xx-large; margin-left: 50px;">
+        <i class="glyphicon glyphicon-shopping-cart"></i> Your Past Orders
+    </h3>
+    {% for order in orders %}
+    <div class="row" style="display: flex; margin-left:50px">
+        <div class="col-lg-8">
+            <h3 class="bold">Order ID: {{ order.id }}</h3>
+            <table>
+                <tr>
+                    <td>Reference:</td>
+                    <td>{{ order.reference }}</td>
+                </tr>
+                <tr>
+                    <td>Name:</td>
+                    <td>{{ order.first_name }} {{ order.last_name }}</td>
+                </tr>
+                <tr>
+                    <td>Address:</td>
+                    <td>{{ order.address }}, {{ order.city }}, {{ order.country }}</td>
+                </tr>
+                <tr>
+                    <td>Items:</td>
+                    <td>
+                        {% if order.items %}
+                            {% for item in order.items %}
+                                {{ item.product.name }}{% if not loop.last %}, {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            No items
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>Total:</td>
+                    <td>{{ (order.order_total() / 100) if order.order_total() else 0 }}€</td>
+                </tr>
+            </table>
+            <div style="margin-top:20px; ">
+                <a href="{{ url_for('reorder', order_id=order.id) }}">
+                    <button style="margin-top:12px;width:130px; height: 35px; font-size:16px;">
+                        Order Again
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+           
+   
+</div>
+{% endblock %}

@@ -1,0 +1,92 @@
+@font-face {
+    font-family: 'Ubuntu';
+    font-weight: 400;
+    font-style: normal;
+    src: url('./fonts/Ubuntu-regular/Ubuntu-regular.eot');
+    src: url('./fonts/Ubuntu-regular/Ubuntu-regular.eot?#iefix') format('embedded-opentype'),
+         local('Ubuntu'),
+         local('Ubuntu-regular'),
+         url('./fonts/Ubuntu-regular/Ubuntu-regular.woff2') format('woff2'),
+         url('./fonts/Ubuntu-regular/Ubuntu-regular.woff') format('woff'),
+         url('./fonts/Ubuntu-regular/Ubuntu-regular.ttf') format('truetype'),
+         url('./fonts/Ubuntu-regular/Ubuntu-regular.svg#Ubuntu') format('svg');
+  }
+  
+  body {
+    font-family: 'Ubuntu', sans-serif;
+    text-align: center;
+    background-image: url("../img/homepage.png");
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-attachment: fixed;
+    margin: 0;
+    padding: 0;
+}
+.container {
+    margin-top: 40px !important;
+    margin-left: 70px;
+    margin-right: 40px;
+    margin-bottom: 70px;
+    color:black;
+}
+
+.page-title {
+    text-align: center;
+    font-size: 40px;
+    margin-bottom: 40px;
+    font-weight: bold;
+    text-shadow: 3px 3px 3px black;
+    color: white;
+}
+
+.product-card {
+    border: 1px solid white;
+    padding: 10px;
+    background-color: white;
+    margin-inline-start: 60px;
+    margin-inline-end: 60px;
+    margin-block-start: 60px;
+    height: 450px;
+    width: 300px;
+    box-shadow: 2px 2px 2px black;
+}
+
+.product-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.product-description {
+    margin-top: 12px;
+}
+
+.product-actions {
+    text-align: center;
+}
+
+.brand-info {
+    margin-top: 50px;
+    text-align: center;
+    font-style: italic;
+    font-size: 20px;
+    color: white;
+    text-shadow: 0.5px 0.5px 0.5px black;
+}
+
+.footer-comment {
+    text-align: center;
+    font-size: 15px;
+    color:white;
+}
+
+  a, a:hover, a:active, a:focus, a:visited {
+      text-decoration: none;
+      /*color: blue;*/
+  }
+  .bold {
+      font-weight: bolder !important;
+  }
+  
+ 
+ 
+  

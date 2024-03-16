@@ -1,0 +1,90 @@
+{% extends "for_all.html" %}
+{% block title %}Your Account{% endblock %}
+
+{% block body %}
+<head>
+    <link rel="stylesheet" type="text/css" href="/static/css/account.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<div class="content-section">
+    <div class="media account-media">
+        <img class="rounded-circle account-img" src="/static/profile_pics/default.jpg">
+        <div class="media-body">
+            <h2 class="account-heading">{{ current_user.username }}</h2>
+        </div>
+    </div>
+    <p class="account-info-heading">Account info</p>
+    <form method="POST" action="" class="account-form">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            {{ form.username.label }}
+            {{ form.username(class="form-control", readonly="readonly") }}
+        </div>
+        <div class="form-group">
+            {{ form.email.label }}
+            {{ form.email(class="form-control", readonly="readonly") }}
+        </div>
+        <div class="form-group">
+            {{ form.full_name.label }}
+            {{ form.full_name(class="form-control", readonly="readonly") }}
+        </div>
+        <div class="form-group">
+            {{ form.gender.label }}
+            {{ form.gender(id="gender", class="form-control", disabled="disabled") }}
+        </div>
+        <button type="button" id="update-button" class="btn btn-primary">Update</button>
+        <button type="submit" id="submit-button" class="btn btn-primary" style="display: none;">Submit</button>
+        <button type="button" id="cancel-button" class="btn btn-primary" style="background-color: red; display: none;">Cancel</button>
+    </form>
+    {% for field, errors in form.errors.items() %}
+        {% for error in errors %}
+            <div class="alert alert-danger">{{ error }}</div>
+        {% endfor %}
+    {% endfor %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <div>
+        <a href="{{ url_for('change_password') }}" class="change-password-link" style="color: white; background-color: blue; padding: 10px 20px; text-decoration: none;">Change Password</a>
+    </div>
+    <div style="margin-top: 20px;">
+        <a href="{{ url_for('export_data') }}" class="export-data-link" style="color: white; background-color: green; padding: 10px 20px; text-decoration: none;">Export Data</a>
+    </div>
+    <div style="margin-top: 30px;">
+        <a href="{{ url_for('delete_account') }}" class="delete-account-link" style="color: white; background-color: red; padding: 10px 20px; text-decoration: none;">Delete Account</a>
+    </div>
+    {% if current_user.is_admin %}
+    <div style="margin-top: 40px;">
+        <a href="{{ url_for('admin') }}" class="admin-link" style="color: white; background-color: black; padding: 10px 20px; text-decoration: none;">Admin</a>
+    </div>
+    {% endif %}
+</div>
+
+<script>
+    $(document).ready(function() {
+        // Store the initial form data
+        var initialFormData = $('.account-form').serialize();
+    
+        $('#update-button').click(function() {
+            $('.form-control').prop('readonly', false);  // Make the form fields editable
+            $('#gender').prop('disabled', false);  // Enable the gender select field
+            $(this).hide();  // Hide the "Update" button
+            $('#submit-button').show();  // Show the "Submit" button
+            $('#cancel-button').show();  // Show the "Cancel" button
+        });
+    
+        $('#submit-button, #cancel-button').click(function() {
+            $('.form-control').prop('readonly', true);  // Make the form fields readonly again
+            $('#gender').prop('disabled', false);  // Enable the gender select field
+            $('#update-button').show();  // Show the "Update" button
+            $('#submit-button').hide();  // Hide the "Submit" button
+            $('#cancel-button').hide();  // Hide the "Cancel" button
+        });
+    });
+</script>
+
+{% endblock %}

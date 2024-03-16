@@ -1,0 +1,105 @@
+{% extends "for_all.html" %}
+{% block title %}Checkout{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/checkout.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{% endblock %}
+
+{% block body %}
+<script>
+    $(document).ready(function() {
+        $('#payment-method').change(function() {
+            var paymentMethod = $(this).val();
+            // Clear and hide the card fields
+            $('#card-fields input').val('');
+            $('#card-fields').hide();
+            // Clear and hide the PayPal field
+            $('#paypal-field input').val('');
+            $('#paypal-field').hide();
+            // Clear and hide the MBWay field
+            $('#mbway-field input').val('');
+            $('#mbway-field').hide();
+            // Clear and hide the Multibanco field
+            $('#multibanco-field input').val('');
+            $('#multibanco-field').hide();
+            if (paymentMethod == 'Credit Card') {
+                $('#card-fields').show();
+            } else if (paymentMethod == 'Paypal') {
+                $('#paypal-field').show();
+            } else if (paymentMethod == 'MBWay') {
+                $('#mbway-field').show();
+            } else if (paymentMethod == 'Multibanco') {
+                $('#multibanco-field').show();
+            }
+        }).change();  // trigger the change event to set the initial state
+    });
+</script>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form method="POST">
+                        {{ form.hidden_tag() }}
+                        <div class="form-group">
+                            <i class="fa fa-user"></i> {{ form.first_name.label }} {{ form.first_name(class="form-control", value=user.full_name.split()[0]) }}
+                        </div>
+                        <div class="form-group">
+                            <i class="fa fa-user"></i> {{ form.last_name.label }} {{ form.last_name(class="form-control", value=user.full_name.split()[-1]) }}
+                        </div>
+                        <div class="form-group">
+                            <i class="fa fa-phone"></i> {{ form.phone_number.label }} {{ form.phone_number(class="form-control") }}
+                        </div>
+                        <div class="form-group">
+                            <i class="fa fa-envelope"></i> {{ form.email.label }} {{ form.email(class="form-control", value=user.email) }}
+                        </div>
+                        <div class="form-group">
+                            <i class="fa fa-home"></i> {{ form.address.label }} {{ form.address(class="form-control") }}
+                        </div>
+                        <div class="form-group">
+                            <i class="fa fa-building"></i> {{ form.city.label }} {{ form.city(class="form-control") }}
+                        </div>
+                        <div class="form-group">
+                            <i class="fa fa-globe"></i> {{ form.country.label }} {{ form.country(class="form-control") }}
+                        </div>
+                        <div class="form-group">
+                            <i class="fa fa-credit-card"></i> {{ form.payment_method.label }} {{ form.payment_method(id="payment-method", class="form-control") }}
+                        </div>
+                        <div id="card-fields">
+                            <div class="form-group">
+                                <i class="fa fa-credit-card"></i> {{ form.card_number.label }} {{ form.card_number(class="form-control") }}
+                            </div>
+                            <div class="form-group">
+                                <i class="fa fa-calendar"></i> {{ form.expiration_date.label }} {{ form.expiration_date(class="form-control") }}
+                            </div>
+                            <div class="form-group">
+                                <i class="fa fa-lock"></i> {{ form.cvv.label }} {{ form.cvv(class="form-control") }}
+                            </div>
+                        </div>
+                        <div class="form-group" id="paypal-field">
+                            <i class="fa fa-paypal"></i> {{ form.paypal_email.label }} {{ form.paypal_email(class="form-control") }}
+                        </div>
+                        <div class="form-group" id="mbway-field">
+                            <i class="fa fa-mobile"></i> {{ form.mbway_phone_number.label }} {{ form.mbway_phone_number(class="form-control") }}
+                        </div>
+                        <div id="multibanco-field">
+                            <div class="form-group">
+                                <i class="fa fa-university"></i> <p> Entity: 23594</p>
+                            </div>
+                            <div class="form-group">
+                                <i class="fa fa-file-text-o"></i> <p> Reference: 925899209</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{ form.submit(class="btn btn-primary") }}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

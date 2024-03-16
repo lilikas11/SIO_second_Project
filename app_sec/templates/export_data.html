@@ -1,0 +1,50 @@
+{% extends "for_all.html" %}
+{% block title %}Change Password{% endblock %}
+
+{% block body %}
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/static/css/account.css">
+</head>
+<script>
+    function togglePasswordVisibility() {
+        var passwordField = document.querySelector('[name="password"]');
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+        } else {
+            passwordField.type = "password";
+        }
+    }
+</script>
+<div class="content-section">
+    <div class="media account-media">
+        <img class="rounded-circle account-img" src="/static/profile_pics/default.jpg">
+        <div class="media-body">
+            <h2 class="account-heading">{{ current_user.username }}</h2>
+        </div>
+    </div>
+    <p class="account-info-heading">Confirm Password</p>
+    <form method="POST" action="" class="account-form">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            {{ form.password.label }}
+            {{ form.password(class="form-control") }}
+            <button type="button" onclick="togglePasswordVisibility()">Show</button>
+        </div>
+        <button type="submit" class="btn btn-primary" style="color: white; background-color: green; padding: 10px 20px; text-decoration: none;">Export Data</button>
+    </form>
+    {% for field, errors in form.errors.items() %}
+    {% for error in errors %}
+        <div class="alert alert-danger">{{ error }}</div>
+    {% endfor %}
+    {% endfor %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+</div>
+
+{% endblock %}

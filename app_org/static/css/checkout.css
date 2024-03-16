@@ -1,0 +1,61 @@
+/* General styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-image: url("../img/homepage.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: center;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.panel-default {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
+    color: black;
+}
+
+/* Form styles */
+.form-group {
+    display: flex; /* Use flexbox to align labels and input fields */
+    align-items: center; /* Center vertically within the form group */
+    margin-bottom: 10px; /* Reduce spacing between form groups */
+}
+
+.form-control, .form-group label, select {
+    font-size: 14px; /* Make the text smaller */
+}
+
+.form-control {
+    padding: 8px; /* Reduce padding for form controls */
+    flex: 1; /* Allow input fields to take up the remaining space */
+}
+
+.form-group label {
+    padding-right: 10px; /* Provide spacing between label and input */
+    width: 30%; /* Control the width of labels */
+    text-align: right; /* Right-align the labels */
+}
+
+/* Payment Method form styles */
+.payment-form {
+    display: none; /* Initially hide the payment method forms */
+}
+
+/* Submit button styles */
+.btn.btn-primary {
+    font-size: 14px; /* Make the button text smaller */
+    padding: 10px 20px; /* Reduce button padding */
+}

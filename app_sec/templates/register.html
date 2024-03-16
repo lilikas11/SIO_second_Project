@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
+
+  </head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.4.2/zxcvbn.js"></script>
+  <script>
+    function togglePasswordVisibility() {
+        var passwordField = document.querySelector('[name="password"]');
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+        } else {
+            passwordField.type = "password";
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        var passwordField = document.querySelector('[name="password"]');
+        passwordField.addEventListener("input", checkPasswordStrength);
+    });
+
+    function checkPasswordStrength() {
+        var password = document.querySelector('[name="password"]').value;
+        var passwordStrengthText = document.getElementById("password-strength-text");
+        var passwordStrengthMeter = document.getElementById("password-strength-meter");
+
+        if (typeof zxcvbn === "function") {
+            console.log("zxcvbn library is available");
+        } else {
+            console.error("zxcvbn library not found");
+            return;
+        }
+
+        var passwordStrength = zxcvbn(password);
+        var zxcvbnScore = passwordStrength.score;
+        switch (zxcvbnScore) {
+            case 0:
+                passwordStrengthText.textContent = "Password strength: Very Weak";
+                passwordStrengthText.style.color = "red";
+                passwordStrengthMeter.value = 1;
+                break;
+            case 1:
+                passwordStrengthText.textContent = "Password strength: Weak";
+                passwordStrengthText.style.color = "orange";
+                passwordStrengthMeter.value = 2;
+                break;
+            case 2:
+                passwordStrengthText.textContent = "Password strength: Moderate";
+                passwordStrengthText.style.color = "yellow";
+                passwordStrengthMeter.value = 3;
+                break;
+            case 3:
+                passwordStrengthText.textContent = "Password strength: Strong";
+                passwordStrengthText.style.color = "green";
+                passwordStrengthMeter.value = 4;
+                break;
+            case 4:
+                passwordStrengthText.textContent = "Password strength: Very Strong";
+                passwordStrengthText.style.color = "darkgreen";
+                passwordStrengthMeter.value = 5;
+                break;
+            default:
+                break;
+        }
+    }
+  </script>
+  <body>
+    <p>Register Page</p>
+
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        {{ form.username }}
+        <div class="password-group">
+          {{ form.password }}
+          <button type="button" onclick="togglePasswordVisibility()">Show</button>
+      </div>
+      <div>
+        <progress id="password-strength-meter" max="5" value="0"></progress>
+        <span id="password-strength-text" style="color:black; font-size:12px">Password strength: Very Weak</span>
+      </div>
+    
+      
+        {{ form. gender }}
+        {{ form.email }}
+        {{ form.full_name }}
+        {{ form.consent.label(class_='consent-label') }} {{ form.consent }}
+        {{ form.submit() }}
+    </form>
+    {% for field, errors in form.errors.items() %}
+    {% for error in errors %}
+        <div class="alert alert-danger">{{ error }}</div>
+    {% endfor %}
+    {% endfor %}
+
+
+
+    <div class="button-box">
+      <a href="{{ url_for('login') }}" class="button"
+        >Already have an account? Login</a
+      >
+    </div>
+
+
+
+  </body>
+</html>
